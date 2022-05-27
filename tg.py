@@ -1,16 +1,25 @@
 import logging
 
 from environs import Env
+from telegram import Bot
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 from dialogflow import detect_intent_texts
 
 
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO,
-)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("tg-bot")
+
+
+class TelegramLogsHandler(logging.Handler):
+    def __init__(self, token, chat_id):
+        super().__init__()
+        self.bot = Bot(token=token)
+        self.chat_id = chat_id
+
+    def emit(self, record):
+        log_entry = self.format(record)
+        self.bot.send_message(self.chat_id, "Бот упал с ошибкой:")
+        self.bot.send_message(self.chat_id, log_entry)
 
 
 def start(update, context):
@@ -44,4 +53,12 @@ def bot(token):
 if __name__ == "__main__":
     env = Env()
     env.read_env()
-    bot(env.str("TG_BOT_TOKEN"))
+
+    logging.basicConfig(level=env.str("LOGGING_LEVEL", "WARNING"))
+    logger.addHandler(
+        TelegramLogsHandler(env.str("TG_BOT_TOKEN"), env.str("TG_CHAT_ID"))
+    )
+    try:
+        bot(env.str("TG_BOT_TOKEN"))
+    except Exception as err:
+        logger.exception(err)
