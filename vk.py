@@ -13,9 +13,12 @@ def dialog(event, vk_api):
         session_id=event.user_id,
         text=event.text,
     )
+    if answer.intent.is_fallback:
+        return
+
     vk_api.messages.send(
         user_id=event.user_id,
-        message=answer,
+        message=answer.fulfillment_text,
         random_id=random.randint(1, 1000),
     )
 

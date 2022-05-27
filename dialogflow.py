@@ -28,7 +28,7 @@ def detect_intent_texts(project_id, session_id, text, language_code="ru-RU"):
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
-    return response.query_result.fulfillment_text
+    return response.query_result
 
 
 def create_intent(project_id, display_name, questions, answers):

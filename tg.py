@@ -25,7 +25,9 @@ def dialog(update, context):
         session_id=update.effective_chat.id,
         text=update.message.text,
     )
-    context.bot.send_message(chat_id=update.effective_chat.id, text=answer)
+    context.bot.send_message(
+        chat_id=update.effective_chat.id, text=answer.fulfillment_text
+    )
 
 
 def bot(token):
