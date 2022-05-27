@@ -13,8 +13,8 @@
 
 Для работы с Dialogflow понадобится:
 
-- Создайть проект в Google Cloud и сохранить его id. Подробнее [здесь](https://cloud.google.com/dialogflow/es/docs/quick/setup#project).
-- Создайте "агента", который будет отвечать на вопросы. При создания агента понадобится ввести id проекта из предыдущего пункта. Укажите язык агента "русский", иначе он вас не поймет. Подробнее [здесь](https://cloud.google.com/dialogflow/es/docs/quick/build-agent).
+- Создайте проект в Google Cloud и сохранить его id. Подробнее [здесь](https://cloud.google.com/dialogflow/es/docs/quick/setup#project).
+- Создайте "агента", который будет отвечать на вопросы. При создании агента понадобится ввести id проекта из предыдущего пункта. Укажите язык агента "русский", иначе он вас не поймет. Подробнее [здесь](https://cloud.google.com/dialogflow/es/docs/quick/build-agent).
 - Зарегистрируйте сервисный аккаунт для проекта и скачайте JSON-ключ. Подробнее [здесь](https://cloud.google.com/docs/authentication/getting-started).
 
 ## Подготовка
