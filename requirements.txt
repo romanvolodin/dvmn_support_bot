@@ -1,5 +1,6 @@
 black==22.3.*
 environs==9.5.*
 flake8==4.0.*
+google-cloud-dialogflow==2.14.*
 python-telegram-bot==13.*
 requests==2.27.*
