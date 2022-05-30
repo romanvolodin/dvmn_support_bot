@@ -30,7 +30,7 @@ def start(update, context):
 
 def reply_to_user(update, context):
     answer = detect_intent_texts(
-        project_id=env.str("DIALOGFLOW_PROJECT_ID"),
+        project_id=context.bot_data["dialogflow_project_id"],
         session_id=update.effective_chat.id,
         text=update.message.text,
     )
@@ -39,9 +39,10 @@ def reply_to_user(update, context):
     )
 
 
-def run_bot(token):
+def run_bot(token, dialogflow_project_id):
     updater = Updater(token=token)
     dispatcher = updater.dispatcher
+    dispatcher.bot_data["dialogflow_project_id"] = dialogflow_project_id
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(
         MessageHandler(Filters.text & ~Filters.command, reply_to_user)
@@ -59,6 +60,6 @@ if __name__ == "__main__":
         TelegramLogsHandler(env.str("TG_BOT_TOKEN"), env.str("TG_CHAT_ID"))
     )
     try:
-        run_bot(env.str("TG_BOT_TOKEN"))
+        run_bot(env.str("TG_BOT_TOKEN"), env.str("DIALOGFLOW_PROJECT_ID"))
     except Exception as err:
         logger.exception(err)
