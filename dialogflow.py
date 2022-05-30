@@ -13,11 +13,6 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_json(filepath):
-    with open(filepath, "r") as file:
-        return json.loads(file.read())
-
-
 def detect_intent_texts(project_id, session_id, text, language_code="ru-RU"):
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(project_id, session_id)
@@ -58,7 +53,8 @@ if __name__ == "__main__":
     args = parse_args()
 
     try:
-        intents = load_json(args.path)
+        with open(args.path, "r") as file:
+            intents = json.loads(file.read())
     except (FileNotFoundError, PermissionError) as err:
         exit(err)
 
