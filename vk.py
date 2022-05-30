@@ -12,7 +12,7 @@ from tg import TelegramLogsHandler
 logger = logging.getLogger("vk-bot")
 
 
-def dialog(event, vk_api):
+def reply_to_user(event, vk_api):
     answer = detect_intent_texts(
         project_id=env.str("DIALOGFLOW_PROJECT_ID"),
         session_id=event.user_id,
@@ -28,14 +28,14 @@ def dialog(event, vk_api):
     )
 
 
-def bot(token):
+def run_bot(token):
     vk_session = vk_api.VkApi(token=token)
     api = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
 
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            dialog(event, api)
+            reply_to_user(event, api)
 
 
 if __name__ == "__main__":
@@ -48,6 +48,6 @@ if __name__ == "__main__":
     )
 
     try:
-        bot(env.str("VK_ACCESS_KEY"))
+        run_bot(env.str("VK_ACCESS_KEY"))
     except Exception as err:
         logger.exception(err)
