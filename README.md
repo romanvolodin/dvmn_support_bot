@@ -123,6 +123,36 @@ python tg.py
 
 В случае успешного старта скрипт ничего не выводит и запускает бесконечный цикл. Остановить можно командой `Ctrl+C`.
 
+## Запуск проекта в Docker
+
+Для запуска потребуется установленный Docker. Инструции по установке смотрите [здесь](https://docs.docker.com/get-docker/).
+
+Прежде всего надо собрать образ. Перейдите в корень проекта и выполните команду (обратите внимание на точку в конце, она важна):
+
+```sh
+docker build --tag dvmn-support-bot-image .
+```
+
+Теперь запускаем контейнер из получившегося образа:
+
+```sh
+docker run --name support-bot-container -d --env-file .env dvmn-support-bot-image
+```
+
+Копируем файл `example-project-157495-32834a814fa6.json` внутрь контейнера:
+
+```sh
+docker cp /path/to/example-project-157495-32834a814fa6.json support-bot-container:app/example-project-157495-32834a814fa6.json
+```
+
+**ВАЖНО**: Путь к файлу внутри контейнера должен соответствовать переменной `GOOGLE_APPLICATION_CREDENTIALS` в `.env`. В команде выше файл копируется в корень папки со скриптами: `...-container:/app/example-project-157495-32834a814fa6.json`. Если переменная имеет вид
+
+```bash
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/example-project-157495-32834a814fa6.json
+```
+
+то, путь будет следующим: `...-container:/app/path/to/example-project-157495-32834a814fa6.json`.
+
 ## Цели проекта
 
 Код написан в учебных целях — для курса по Python на сайте [Devman](https://dvmn.org/modules/chat-bots/)
