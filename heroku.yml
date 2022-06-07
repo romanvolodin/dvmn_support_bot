@@ -1,6 +1,6 @@
-setup:
-  config:
-    env-file: .env
 build:
   docker:
     support-bot: Dockerfile
+run:
+  config:
+    env-file: .env
