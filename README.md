@@ -159,6 +159,15 @@ GOOGLE_APPLICATION_CREDENTIALS=/path/to/example-project-157495-32834a814fa6.json
 docker stop support-bot-container
 ```
 
+## Заметка по деплою на Heroku
+
+В папке проекта есть все файлы, необходимые для запуска бота на Heroku:
+
+- `heroku.yml` - основной файл, который определяет как Heroku будет билдить Docker-образ.
+- `create_google_credentials_json_from_env.sh` - скрипт, создающий `google-credentials.json` с ключами доступа для Dialogflow.
+
+**ВАЖНО:** В переменных окружения (config vars) приложения на Heroku, в переменной `GOOGLE_CREDENTIALS` необходимо заменить все `\n` на `\\n`. Если этого не сделать, то получается некорректный `json` и бот падает.
+
 ## Цели проекта
 
 Код написан в учебных целях — для курса по Python на сайте [Devman](https://dvmn.org/modules/chat-bots/)
