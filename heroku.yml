@@ -1,6 +1,3 @@
 build:
   docker:
     support-bot: Dockerfile
-run:
-  config:
-    env-file: .env
