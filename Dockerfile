@@ -10,4 +10,5 @@ ENV TG_BOT_TOKEN=$TG_BOT_TOKEN \
     GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
     VK_ACCESS_KEY=$VK_ACCESS_KEY \
     LOGGING_LEVEL=$LOGGING_LEVEL
+ENTRYPOINT ["sh", "./create_google_credentials_json_from_env.sh"]
 CMD python vk.py & python tg.py
