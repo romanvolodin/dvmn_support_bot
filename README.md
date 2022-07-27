@@ -153,6 +153,12 @@ GOOGLE_APPLICATION_CREDENTIALS=/path/to/example-project-157495-32834a814fa6.json
 
 то, путь будет следующим: `...-container:/app/path/to/example-project-157495-32834a814fa6.json`.
 
+Остановить контейнер можно командой
+
+```sh
+docker stop support-bot-container
+```
+
 ## Цели проекта
 
 Код написан в учебных целях — для курса по Python на сайте [Devman](https://dvmn.org/modules/chat-bots/)
